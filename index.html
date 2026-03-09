@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JepTech Solutions — Web, Digital &amp; AI Services</title>
+    <meta name="description" content="JepTech Solutions: SEO, AEO &amp; GEO consultancy, website development, and bespoke AI training &amp; automation for non-technical users. Based in the West Midlands.">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #343a40;
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+        a { color: #3D9A95; text-decoration: none; }
+        a:hover { color: #2d7a76; }
+        img { max-width: 100%; height: auto; }
+
+        /* ── Layout ── */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* ── Header ── */
+        header {
+            background: #fff;
+            border-bottom: 3px solid #4DADA8;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo { height: 64px; }
+        nav { display: flex; gap: 1.5rem; }
+        nav a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #343a40;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: #3D9A95; }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #3D9A95 0%, #2d7a76 100%);
+            color: #fff;
+            padding: 5rem 0 4rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.92;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background: #E8A54B; color: #fff; }
+        .btn-primary:hover { background: #d4923e; color: #fff; }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.6);
+            margin-left: 0.75rem;
+        }
+        .btn-outline:hover { border-color: #fff; color: #fff; }
+
+        /* ── Section Shared ── */
+        section { padding: 4rem 0; }
+        section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #3D9A95;
+        }
+        .section-sub {
+            color: #6c757d;
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* ── Services ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+        .service-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .service-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+        .service-card p { font-size: 0.95rem; color: #6c757d; }
+
+        /* ── About ── */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .about-content ul { padding-left: 1.25rem; }
+        .about-content li { margin-bottom: 0.5rem; }
+        .highlight {
+            background: #e6f5f4;
+            border-left: 4px solid #4DADA8;
+            padding: 1rem 1.25rem;
+            border-radius: 0 6px 6px 0;
+            margin-top: 1rem;
+        }
+
+        /* ── Contact ── */
+        .contact-section { background: #fff; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        .contact-info p { margin-bottom: 0.75rem; }
+        .contact-info strong { color: #3D9A95; }
+        form { display: flex; flex-direction: column; gap: 1rem; }
+        label { font-weight: 600; font-size: 0.9rem; }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border: 1.5px solid #dee2e6;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #4DADA8;
+        }
+        textarea { resize: vertical; min-height: 100px; }
+        .form-btn {
+            background: #3D9A95;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: fit-content;
+        }
+        .form-btn:hover { background: #2d7a76; }
+
+        /* ── Footer ── */
+        footer {
+            background: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+        footer a { color: #4DADA8; }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            .about-content, .contact-grid { grid-template-columns: 1fr; }
+            .btn-outline { margin-left: 0; margin-top: 0.5rem; }
+            nav { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+    <div class="container header-inner">
+        <a href="#"><img src="assets/logo.svg" alt="JepTech Solutions" class="logo"></a>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#contact">Get in Touch</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+    <div class="container">
+        <h1>Technology That Works for You</h1>
+        <p>SEO consultancy + ad campaigns, website development and bespoke AI solutions</p>
+        <a href="#contact" class="btn btn-primary">Start a Conversation</a>
+        <a href="#services" class="btn btn-outline">See What We Do</a>
+    </div>
+</section>
+
+<!-- ── Services ── -->
+<section id="services">
+    <div class="container">
+        <h2>What We Do</h2>
+        <p class="section-sub">Practical digital services that make a measurable difference to your business.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔍</div>
+                <h3>SEO, AEO &amp; GEO</h3>
+                <p>Get found by the people who matter. Technical audits, content strategy, and ongoing optimisation for search engines and AI-powered discovery.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Website Development</h3>
+                <p>Clean, effective websites built on Squarespace, WordPress, or bespoke platforms. From a simple landing page to a full business site.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>AI Training &amp; Automation</h3>
+                <p>Bespoke AI workflows, custom knowledge bases, and hands-on training that makes powerful tools accessible to non-technical users.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Digital Marketing</h3>
+                <p>Google Ads management, Analytics reporting, content writing, and strategic consultancy to grow your online presence.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎥</div>
+                <h3>Video &amp; Content</h3>
+                <p>Promotional video production, blog writing, and web copy that connects with your audience and supports your SEO goals.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── About ── -->
+<section id="about" style="background: #fff;">
+    <div class="container">
+        <h2>About JepTech Solutions</h2>
+        <p class="section-sub">Expert technology support with a personal touch.</p>
+        <div class="about-content">
+            <div>
+                <p>JepTech Solutions is run by <strong>John Pearson</strong>, combining 20+ years of IT experience with a background in psychology and community mental health work. The result is tech support that's genuinely built around people&nbsp;&mdash; patient, clear, and focused on what actually helps.</p>
+                <p style="margin-top: 1rem;">Whether you're a sole trader who needs a website that works, a small charity looking to improve your search visibility, or someone who wants to harness AI without the jargon&nbsp;&mdash; I work with you to find the most effective solution, not the most complicated one.</p>
+                <div class="highlight">
+                    <strong>Currently working with:</strong> SEO &amp; digital strategy for healthcare and coaching professionals, website builds for small businesses, and bespoke AI automation for non-technical teams.
+                </div>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 0.75rem;">Why JepTech?</h3>
+                <ul>
+                    <li><strong>Plain English, always.</strong> Complex technology explained clearly.</li>
+                    <li><strong>Person-centred approach.</strong> Informed by counselling training and community work.</li>
+                    <li><strong>Broadly skilled.</strong> Web dev, SEO, AI, video&nbsp;&mdash; one point of contact.</li>
+                    <li><strong>Transparent pricing.</strong> No hidden fees, no pressure to upsell.</li>
+                    <li><strong>Small enough to care.</strong> Every client gets my direct attention.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2>Get in Touch</h2>
+        <p class="section-sub">Tell me a bit about what you need and I'll get back to you.</p>
+        <div class="contact-grid">
+            <form action="https://formsubmit.co/john@jeptech.co.uk" method="POST">
+                <!-- FormSubmit config -->
+                <input type="hidden" name="_subject" value="New enquiry from jeptech.co.uk">
+                <input type="hidden" name="_captcha" value="true">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none">
+
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required autocomplete="name">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                </div>
+                <div>
+                    <label for="interest">I'm interested in&hellip;</label>
+                    <select id="interest" name="interest">
+                        <option value="">Select an option</option>
+                        <option value="SEO / Search Consultancy">SEO / Search Consultancy</option>
+                        <option value="Website Development">Website Development</option>
+                        <option value="AI Training & Automation">AI Training &amp; Automation</option>
+                        <option value="Digital Marketing">Digital Marketing</option>
+                        <option value="Something else">Something else</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="form-btn">Send Enquiry</button>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+    <div class="container">
+        <p>&copy; 2026 JepTech Solutions &middot; John Pearson &middot; Sole Trader</p>
+    </div>
+</footer>
+
+</body>
+</html>
