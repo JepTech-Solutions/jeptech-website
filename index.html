@@ -103,16 +103,23 @@
 
         /* ── Services ── */
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
         }
         .service-card {
+            display: block;
+            width: calc(33.333% - 1rem);
+            min-width: 260px;
             background: #fff;
             border-radius: 10px;
             padding: 2rem 1.5rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
         .service-card:hover {
             transform: translateY(-3px);
@@ -231,31 +238,31 @@
         <h2>What We Do</h2>
         <p class="section-sub">Practical digital services that make a measurable difference to your business.</p>
         <div class="services-grid">
-            <div class="service-card">
+            <a href="services.html#seo" class="service-card">
                 <div class="service-icon">🔍</div>
                 <h3>SEO, AEO &amp; GEO</h3>
                 <p>Get found by the people who matter. Technical audits, content strategy, and ongoing optimisation for search engines and AI-powered discovery.</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="services.html#web-development" class="service-card">
                 <div class="service-icon">🌐</div>
                 <h3>Website Development</h3>
                 <p>Clean, effective websites built on Squarespace, WordPress, or bespoke platforms. From a simple landing page to a full business site.</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="services.html#ai-automation" class="service-card">
                 <div class="service-icon">🤖</div>
                 <h3>AI Training &amp; Automation</h3>
                 <p>Bespoke AI workflows, custom knowledge bases, and hands-on training that makes powerful tools accessible to non-technical users.</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="services.html#digital-marketing" class="service-card">
                 <div class="service-icon">📊</div>
                 <h3>Digital Marketing</h3>
                 <p>Google Ads management, Analytics reporting, content writing, and strategic consultancy to grow your online presence.</p>
-            </div>
-            <div class="service-card">
+            </a>
+            <a href="services.html#video-content" class="service-card">
                 <div class="service-icon">🎥</div>
                 <h3>Video &amp; Content</h3>
                 <p>Promotional video production, blog writing, and web copy that connects with your audience and supports your SEO goals.</p>
-            </div>
+            </a>
 
         </div>
     </div>
