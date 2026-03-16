@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — JepTech Solutions</title>
+    <meta name="description" content="SEO audits, Google Ads management, website development, AI automation, and video production. Practical digital services for small businesses and charities.">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #343a40;
+            line-height: 1.6;
+            background: #f8f9fa;
+        }
+        a { color: #3D9A95; text-decoration: none; }
+        a:hover { color: #2d7a76; }
+        img { max-width: 100%; height: auto; }
+
+        /* ── Layout ── */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* ── Header ── */
+        header {
+            background: #fff;
+            border-bottom: 3px solid #4DADA8;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .logo { height: 64px; }
+        nav { display: flex; gap: 1.5rem; }
+        nav a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #343a40;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: #3D9A95; }
+        nav a.active { color: #3D9A95; }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #3D9A95 0%, #2d7a76 100%);
+            color: #fff;
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.92;
+        }
+
+        /* ── Buttons ── */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background: #E8A54B; color: #fff; }
+        .btn-primary:hover { background: #d4923e; color: #fff; }
+        .btn-teal { background: #3D9A95; color: #fff; }
+        .btn-teal:hover { background: #2d7a76; color: #fff; }
+
+        /* ── Section Shared ── */
+        section { padding: 4rem 0; }
+        section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #3D9A95;
+        }
+        .section-sub {
+            color: #6c757d;
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* ── Service Detail Blocks ── */
+        .service-detail {
+            padding: 3.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .service-detail:last-of-type { border-bottom: none; }
+        .service-detail.alt { background: #fff; }
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .service-icon { font-size: 2rem; }
+        .service-detail h2 { margin-bottom: 0; }
+        .service-detail p { margin-bottom: 1rem; max-width: 800px; }
+        .service-detail ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1.25rem;
+            max-width: 800px;
+        }
+        .service-detail li { margin-bottom: 0.5rem; }
+        .service-detail li strong { color: #2d7a76; }
+
+        /* Feature grid within a service */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.25rem;
+            border-left: 3px solid #4DADA8;
+        }
+        .service-detail.alt .feature-card { background: #f1f3f5; }
+        .feature-card h4 {
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+            color: #343a40;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        /* ── CTA Banner ── */
+        .cta-banner {
+            background: linear-gradient(135deg, #3D9A95 0%, #2d7a76 100%);
+            color: #fff;
+            text-align: center;
+            padding: 3.5rem 0;
+        }
+        .cta-banner h2 { color: #fff; margin-bottom: 0.75rem; }
+        .cta-banner p {
+            opacity: 0.92;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+        footer a { color: #4DADA8; }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            nav { gap: 1rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+    <div class="container header-inner">
+        <a href="index.html"><img src="assets/logo.svg" alt="JepTech Solutions" class="logo"></a>
+        <nav>
+            <a href="services.html" class="active">Services</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Get in Touch</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Practical digital services that make a measurable difference. Every engagement is tailored — no cookie-cutter packages.</p>
+    </div>
+</section>
+
+<!-- ── 1. SEO, AEO & GEO ── -->
+<div class="service-detail" id="seo">
+    <div class="container">
+        <div class="service-header">
+            <div class="service-icon">🔍</div>
+            <h2>SEO, AEO &amp; GEO</h2>
+        </div>
+        <p>Get found by the people who matter — on Google, in AI-generated answers, and across the new wave of generative search engines. We combine traditional search engine optimisation with <strong>Answer Engine Optimisation (AEO)</strong> and <strong>Generative Engine Optimisation (GEO)</strong> to future-proof your visibility.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>Technical SEO Audits</h4>
+                <p>Crawlability, indexability, Core Web Vitals, structured data, and site architecture analysis with actionable recommendations.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Content Strategy</h4>
+                <p>Keyword research, content gap analysis, and editorial planning aligned to E-E-A-T best practices.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Ongoing Optimisation</h4>
+                <p>Monthly performance tracking, ranking reports, and iterative improvements to keep you competitive.</p>
+            </div>
+            <div class="feature-card">
+                <h4>AI Search Readiness</h4>
+                <p>Structured data, llms.txt compliance, and passage-level optimisation so your content gets cited by ChatGPT, Perplexity, and Google AI Overviews.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── 2. Digital Marketing & Google Ads ── -->
+<div class="service-detail alt" id="digital-marketing">
+    <div class="container">
+        <div class="service-header">
+            <div class="service-icon">📊</div>
+            <h2>Digital Marketing &amp; Google Ads</h2>
+        </div>
+        <p>Data-driven advertising and analytics that connect your marketing spend to real business results. We manage Google Ads campaigns for clients and provide transparent, detailed performance reporting using the <strong>Google Ads API</strong>.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>Google Ads Management</h4>
+                <p>Campaign setup, keyword targeting, bid strategy, and ongoing optimisation across Search, Display, Shopping, and Performance Max campaigns.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Performance Reporting</h4>
+                <p>Automated reports pulling real-time data from the Google Ads API — clicks, impressions, conversions, cost, CTR, and CPC across all campaigns.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Analytics &amp; Tracking</h4>
+                <p>Google Analytics 4 setup, conversion tracking, and custom dashboards so you can see exactly what's working.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Strategic Consultancy</h4>
+                <p>Budget allocation advice, audience targeting, and cross-channel strategy to maximise your return on ad spend.</p>
+            </div>
+        </div>
+
+        <p>All client Google Ads accounts are managed under our <strong>Google Ads Manager Account (MCC)</strong>. We use the Google Ads API for read-only data retrieval — pulling campaign metrics into structured audit reports that combine paid and organic performance insights.</p>
+    </div>
+</div>
+
+<!-- ── 3. Website Development ── -->
+<div class="service-detail" id="web-development">
+    <div class="container">
+        <div class="service-header">
+            <div class="service-icon">🌐</div>
+            <h2>Website Development</h2>
+        </div>
+        <p>Clean, effective websites that do what they need to — load fast, look professional, and convert visitors into enquiries. No unnecessary complexity.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>Squarespace &amp; WordPress</h4>
+                <p>Full builds on managed platforms — ideal for small businesses who want to update their own content without touching code.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Bespoke Static Sites</h4>
+                <p>Lightweight, ultra-fast HTML/CSS sites hosted on Cloudflare Pages or Netlify. Perfect for landing pages and portfolios.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Migration &amp; Redesign</h4>
+                <p>Moving from an outdated platform? We handle the migration — content, redirects, and DNS — with zero downtime.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Accessibility &amp; Performance</h4>
+                <p>Every site built to WCAG standards with optimised images, semantic HTML, and sub-second load times.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── 4. AI Training & Automation ── -->
+<div class="service-detail alt" id="ai-automation">
+    <div class="container">
+        <div class="service-header">
+            <div class="service-icon">🤖</div>
+            <h2>AI Training &amp; Automation</h2>
+        </div>
+        <p>Powerful AI tools made accessible to non-technical teams. We build bespoke workflows and deliver hands-on training so you can confidently use AI in your day-to-day work.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>Custom AI Workflows</h4>
+                <p>Automated document processing, data extraction, and content generation pipelines — built around your existing tools and processes.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Knowledge Bases</h4>
+                <p>Searchable internal knowledge libraries with AI-powered Q&amp;A, built from your existing documentation.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Hands-On Training</h4>
+                <p>Practical sessions on ChatGPT, Copilot, and other AI tools — tailored to your team's actual use cases, not generic demos.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Process Automation</h4>
+                <p>Repetitive admin tasks automated with Python scripts, API integrations, and no-code tools like Zapier and Make.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── 5. Video & Content ── -->
+<div class="service-detail" id="video-content">
+    <div class="container">
+        <div class="service-header">
+            <div class="service-icon">🎥</div>
+            <h2>Video &amp; Content</h2>
+        </div>
+        <p>Content that connects with your audience and supports your wider marketing strategy. From promotional videos to blog posts — everything is created with SEO and engagement in mind.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>Promotional Video</h4>
+                <p>Short-form video for social media, websites, and presentations. Filmed, edited, and delivered ready to publish.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Blog &amp; Web Copy</h4>
+                <p>SEO-optimised written content — service pages, blog posts, case studies, and landing page copy.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Content Strategy</h4>
+                <p>Editorial calendars, topic clustering, and content audits to ensure everything you publish is working towards your goals.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── CTA ── -->
+<section class="cta-banner">
+    <div class="container">
+        <h2>Ready to get started?</h2>
+        <p>Tell me about your project and I'll come back with a clear, no-obligation plan.</p>
+        <a href="index.html#contact" class="btn btn-primary">Start a Conversation</a>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+    <div class="container">
+        <p>&copy; 2026 JepTech Solutions &middot; John Pearson &middot; Sole Trader</p>
+    </div>
+</footer>
+
+</body>
+</html>

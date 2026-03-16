@@ -12,9 +12,11 @@ Hosted on **Cloudflare Pages**. Pushes to `main` auto-deploy.
 ## Structure
 
 ```
-index.html          # Single-page landing site
+index.html          # Homepage — hero, service summary, about, contact form
+services.html       # Dedicated services page with detailed descriptions
 assets/
-  logo.webp         # JepTech logo
+  logo.svg          # JepTech logo (SVG)
+  logo.webp         # JepTech logo (WebP fallback)
 ```
 
 ## Contact Form
