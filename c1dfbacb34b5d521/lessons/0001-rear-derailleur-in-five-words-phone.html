@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Lesson 1 – The rear derailleur in five words</title>
+<style>
+/* Bicycle maintenance – shared course stylesheet.
+   Every lesson and reference sheet links this file. Works without scripts,
+   reads on a phone, prints to A4. */
+
+:root {
+  --ink: #1d1f23;
+  --ink-soft: #4a4f57;
+  --paper: #fffdf8;
+  --rule: #e4ded2;
+  --panel: #f5f1e8;
+  --accent: #a3391d;      /* rust – headings, step numbers */
+  --ok: #2f6b3a;          /* the proof check */
+  --warn: #9b1c1c;        /* safety */
+  --memo: #6b4fa0;        /* memory hooks */
+  --altus: #1f5fa8;
+  --s105: #4d5560;
+  --rival: #b3261e;
+  --serif: "Iowan Old Style", Charter, "Palatino Linotype", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 18px/1.55 var(--serif);
+}
+
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.1rem 4rem;
+}
+
+h1, h2, h3, h4 { font-family: var(--sans); line-height: 1.2; }
+h1 { font-size: 1.9rem; margin: 0.5rem 0 0.3rem; }
+h2 {
+  font-size: 1.35rem;
+  color: var(--accent);
+  margin: 2.6rem 0 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 2px solid var(--rule);
+}
+h3 { font-size: 1.1rem; margin: 1.8rem 0 0.4rem; }
+h4 { font-size: 1rem; margin: 1.2rem 0 0.3rem; }
+
+p, li { margin: 0.45rem 0; }
+a { color: var(--accent); }
+small, .meta { font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); }
+.lede { font-size: 1.1rem; color: var(--ink-soft); }
+kbd, .tag {
+  font: 600 0.78rem var(--sans);
+  padding: 0.05rem 0.4rem;
+  border-radius: 0.3rem;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+/* Citations: [1]-style superscript links to the sources list. */
+sup.src a { font: 600 0.7rem var(--sans); text-decoration: none; padding: 0 0.1rem; }
+
+/* Labelled boxes ------------------------------------------------------ */
+.box {
+  margin: 1rem 0;
+  padding: 0.7rem 0.9rem;
+  border-left: 4px solid var(--rule);
+  background: var(--panel);
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+.box > :first-child { margin-top: 0; }
+.box > :last-child { margin-bottom: 0; }
+.box .label {
+  display: block;
+  font: 700 0.72rem var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.box.check { border-color: var(--ok); background: #eef5ee; }
+.box.check .label { color: var(--ok); }
+.box.warn { border-color: var(--warn); background: #fbeeee; }
+.box.warn .label { color: var(--warn); }
+.box.memo { border-color: var(--memo); background: #f2eef9; }
+.box.memo .label { color: var(--memo); }
+.box.synth { border-color: var(--ink-soft); }
+.box.synth .label { color: var(--ink-soft); }
+
+/* Numbered procedure steps with a tick box (works without scripts). ----- */
+ol.steps { list-style: none; padding: 0; margin: 1rem 0; counter-reset: step; }
+ol.steps > li {
+  position: relative;
+  counter-increment: step;
+  margin: 0 0 0.9rem;
+  padding: 0.7rem 0.9rem 0.7rem 3.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: #fff;
+  break-inside: avoid;
+}
+ol.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0.8rem;
+  top: 0.7rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font: 700 0.95rem/1.8rem var(--sans);
+  text-align: center;
+}
+ol.steps > li > input[type="checkbox"] {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.85rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  accent-color: var(--ok);
+}
+ol.steps > li:has(> input:checked) { opacity: 0.55; }
+ol.steps > li > strong:first-of-type {
+  display: block;
+  font-family: var(--sans);
+  padding-right: 2rem;
+}
+.gear {
+  display: inline-block;
+  font: 600 0.8rem var(--sans);
+  color: #fff;
+  background: var(--ink-soft);
+  padding: 0.05rem 0.45rem;
+  border-radius: 0.3rem;
+}
+
+/* Bike switch: radio buttons + :has(), no scripts needed. ------------- */
+.bike-switch {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.5rem 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+.bike-switch input { position: absolute; opacity: 0; }
+.bike-switch label {
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+  cursor: pointer;
+  background: #fff;
+}
+.bike-switch input:checked + label { background: var(--ink); color: #fff; border-color: var(--ink); }
+.bike-switch input:focus-visible + label { outline: 2px solid var(--accent); }
+
+[data-bike] { border-left: 4px solid var(--rule); padding-left: 0.6rem; }
+[data-bike="altus"] { border-color: var(--altus); }
+[data-bike="s105"]  { border-color: var(--s105); }
+[data-bike="rival"] { border-color: var(--rival); }
+body:has(#bike-altus:checked) [data-bike]:not([data-bike~="altus"]),
+body:has(#bike-s105:checked)  [data-bike]:not([data-bike~="s105"]),
+body:has(#bike-rival:checked) [data-bike]:not([data-bike~="rival"]) { display: none; }
+
+/* Tables ------------------------------------------------------------- */
+.table-wrap { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: collapse; width: 100%; font: 0.88rem/1.4 var(--sans); }
+th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--rule); }
+th { background: var(--panel); }
+
+/* Figures ------------------------------------------------------------ */
+figure { margin: 1.2rem 0; }
+figure svg { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--rule); border-radius: 0.5rem; }
+figcaption { font: 0.82rem/1.4 var(--sans); color: var(--ink-soft); margin-top: 0.4rem; }
+
+/* Self-test: retrieval practice with <details>. ----------------------- */
+details.recall {
+  margin: 0.7rem 0;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: #fff;
+  break-inside: avoid;
+}
+details.recall summary {
+  cursor: pointer;
+  padding: 0.6rem 0.8rem;
+  font-family: var(--sans);
+  font-weight: 600;
+}
+details.recall summary::marker { color: var(--memo); }
+details.recall > div { padding: 0 0.8rem 0.7rem; border-top: 1px dashed var(--rule); }
+
+/* Contents --------------------------------------------------------------- */
+nav.toc { font-family: var(--sans); font-size: 0.9rem; }
+nav.toc ol { padding-left: 1.2rem; }
+
+/* Print: A4, every bike shown, no switch. ----------------------------- */
+@media print {
+  body { font-size: 11pt; background: #fff; }
+  main { max-width: none; padding: 0; }
+  .bike-switch, .no-print { display: none !important; }
+  body [data-bike] { display: block !important; }
+  details.recall { display: none; }
+  h2 { break-before: auto; break-after: avoid; }
+  a { color: inherit; text-decoration: none; }
+  @page { size: A4; margin: 14mm; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 17px; }
+  ol.steps > li { padding-left: 2.9rem; }
+}
+
+/* Gear map: which chainring and which cog a step uses. ----------------
+   <span class="gearmap" aria-label="big ring, smallest cog">
+     <span class="rings"><i></i><i class="on"></i></span>
+     <span class="cogs"><i class="on"></i><i></i>…</span>
+   </span>
+   Rings are listed inner to outer; cogs are listed smallest to largest. */
+.gearmap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  vertical-align: middle;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.35rem;
+  background: #fff;
+}
+.gearmap .rings, .gearmap .cogs { display: inline-flex; align-items: center; gap: 2px; }
+.gearmap .rings { flex-direction: row; }
+.gearmap .cogs { flex-direction: row; }
+.gearmap i { display: block; width: 4px; background: #c9c2b4; border-radius: 1px; }
+.gearmap .rings i:nth-child(1) { height: 14px; }
+.gearmap .rings i:nth-child(2) { height: 20px; }
+.gearmap .rings i:nth-child(3) { height: 26px; }
+.gearmap .rings i:only-child { height: 22px; }
+.gearmap .cogs i:nth-child(1) { height: 8px; }
+.gearmap .cogs i:nth-child(2) { height: 10px; }
+.gearmap .cogs i:nth-child(3) { height: 12px; }
+.gearmap .cogs i:nth-child(4) { height: 14px; }
+.gearmap .cogs i:nth-child(5) { height: 16px; }
+.gearmap .cogs i:nth-child(6) { height: 18px; }
+.gearmap .cogs i:nth-child(7) { height: 20px; }
+.gearmap .cogs i:nth-child(8) { height: 22px; }
+.gearmap .cogs i:nth-child(9) { height: 24px; }
+.gearmap .cogs i:nth-child(10) { height: 26px; }
+.gearmap .cogs i:nth-child(11) { height: 28px; }
+.gearmap i.on { background: var(--accent); }
+.gearmap + .gear-words { font: 600 0.82rem var(--sans); color: var(--ink-soft); margin-left: 0.3rem; }
+
+/* Diagrams linked as files (the phone build inlines them). */
+figure img { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--rule); border-radius: 0.5rem; }
+
+/* Spec cards: one per bike. */
+.spec { margin: 1rem 0; padding: 0.7rem 0.9rem; border: 1px solid var(--rule); border-radius: 0.5rem; background: #fff; break-inside: avoid; }
+.spec h3 { margin-top: 0; }
+.spec dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 0.8rem; margin: 0; font: 0.88rem/1.4 var(--sans); }
+.spec dt { font-weight: 600; }
+.spec dd { margin: 0; }
+@media (max-width: 480px) { .spec dl { grid-template-columns: 1fr; } .spec dd { margin-bottom: 0.3rem; } }
+
+/* Phone: diagrams keep a readable size and scroll sideways. */
+@media (max-width: 480px) {
+  figure:has(> img, > svg) { overflow-x: auto; }
+  figure > img, figure > svg { min-width: 600px; }
+}
+@media print {
+  figure > img, figure > svg { min-width: 0; max-width: 72%; margin: 0 auto; }
+  figure { break-inside: avoid; }
+  ol.steps > li { break-inside: auto; }
+  .box { break-inside: avoid; }
+}
+
+/* Glossary: term and plain-words definition. */
+dl.glossary { margin: 0.6rem 0; }
+dl.glossary dt { font: 700 0.98rem var(--sans); margin-top: 0.9rem; }
+dl.glossary dd { margin: 0.15rem 0 0; }
+
+/* Quiz (assets/quiz.js): answers are buttons of equal length; colour only after a tap. */
+.quiz { margin: 1rem 0; padding: 0.7rem 0.9rem; border: 1px solid var(--rule); border-radius: 0.5rem; background: #fff; break-inside: avoid; }
+.quiz .q { font-family: var(--sans); font-weight: 600; margin-top: 0; }
+.quiz button {
+  display: block; width: 100%; margin: 0.4rem 0; padding: 0.55rem 0.7rem;
+  text-align: left; font: 0.95rem/1.35 var(--sans); color: var(--ink);
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 0.4rem; cursor: pointer;
+}
+.quiz button.right { background: #eef5ee; border-color: var(--ok); }
+.quiz button.right::after { content: "  ✓"; color: var(--ok); font-weight: 700; }
+.quiz button.wrong { background: #fbeeee; border-color: var(--warn); }
+.quiz button.wrong::after { content: "  ✗"; color: var(--warn); font-weight: 700; }
+.quiz .why { margin-bottom: 0; font-size: 0.95rem; }
+.quiz-score { font: 600 0.9rem var(--sans); color: var(--ok); }
+</style>
+</head>
+<body>
+<main>
+
+<p class="meta">Lesson 1 · John's bicycle maintenance course · 17 October 2026 · about 15 minutes, then the bike</p>
+<h1>The rear derailleur in five words</h1>
+<p class="lede">By the end you can say the rear method from memory – each step, its gear and its proof – and you are ready to fit the new Altus on Sophia's bike.</p>
+
+<h2>Why this first</h2>
+<p>Sophia's bike is the simplest of your three jobs: one new rear derailleur (the arm under the back gears that moves the chain from gear to gear). Her bike has a hanger, a 7-speed cassette and one chainring (the toothed ring at the pedals), so there is no front derailleur to worry about. The same five steps then set up the 105 rear on the Defy and fix the Boardman, so learning them once pays three times. The full step-by-step is in the derailleur guide; words you have not met are in the glossary.</p>
+
+<h2>The parts you need</h2>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgU2Vnb2UgVUksIFJvYm90bywgc2Fucy1zZXJpZiI+CiAgPHRpdGxlIGlkPSJ0Ij5SZWFyIGRlcmFpbGxldXI6IHRoZSBwYXJ0cyB5b3Ugd2lsbCB0b3VjaDwvdGl0bGU+CiAgPGRlc2MgaWQ9ImQiPlNjaGVtYXRpYyBzaWRlIHZpZXcgZnJvbSB0aGUgZHJpdmUgc2lkZSwgZnJvbnQgb2YgdGhlIGJpa2UgdG8gdGhlIHJpZ2h0LiBUaGUgZGVyYWlsbGV1ciBoYW5ncyBmcm9tIHRoZSBoYW5nZXIgYnkgdGhlIG1vdW50aW5nIGJvbHQuIFRoZSBCLXNjcmV3IHJlc3RzIGFnYWluc3QgdGhlIGhhbmdlciB0YWIuIFRoZSBIIGFuZCBMIGxpbWl0IHNjcmV3cyBzaXQgb24gdGhlIGJvZHkuIFRoZSBob3VzaW5nIGVudGVycyB0aGUgYmFycmVsIGFkanVzdGVyIGFuZCB0aGUgaW5uZXIgY2FibGUgaXMgY2xhbXBlZCB1bmRlciB0aGUgY2FibGUgZml4aW5nIGJvbHQuIFRoZSBjYWdlIGhvbGRzIHRoZSBndWlkZSBwdWxsZXkgYXQgdGhlIHRvcCBhbmQgdGhlIHRlbnNpb24gcHVsbGV5IGF0IHRoZSBib3R0b20uPC9kZXNjPgogIDxzdHlsZT4KICAgIC5jb2d7ZmlsbDpub25lO3N0cm9rZTojOGE4Zjk4O3N0cm9rZS13aWR0aDo5O3N0cm9rZS1kYXNoYXJyYXk6NSA0fS5jb2cye2ZpbGw6bm9uZTtzdHJva2U6IzhhOGY5ODtzdHJva2Utd2lkdGg6NjtzdHJva2UtZGFzaGFycmF5OjQgNH0KICAgIC5mcmFtZXtmaWxsOiNjOWMyYjQ7c3Ryb2tlOiM4YThmOTh9LnBhcnR7ZmlsbDojNGE0ZjU3fS5jYWdle2ZpbGw6IzFkMWYyM30ucHVse2ZpbGw6I2ZmZjtzdHJva2U6IzFkMWYyMztzdHJva2Utd2lkdGg6NX0KICAgIC5jaGFpbntmaWxsOm5vbmU7c3Ryb2tlOiNhMzM5MWQ7c3Ryb2tlLXdpZHRoOjN9LnNjcmV3e2ZpbGw6I2EzMzkxZH0uaG91c2luZ3tmaWxsOm5vbmU7c3Ryb2tlOiMxZDFmMjM7c3Ryb2tlLXdpZHRoOjc7c3Ryb2tlLWxpbmVjYXA6cm91bmR9CiAgICAubGVhZHtzdHJva2U6IzRhNGY1NztzdHJva2Utd2lkdGg6MX0ubGFie2ZvbnQtc2l6ZToxM3B4O2ZpbGw6IzFkMWYyMztmb250LXdlaWdodDo2MDB9LnRpdGxle2ZvbnQtc2l6ZToxNXB4O2ZvbnQtd2VpZ2h0OjcwMDtmaWxsOiMxZDFmMjN9Lm5vdGV7Zm9udC1zaXplOjEycHg7ZmlsbDojNGE0ZjU3fQogIDwvc3R5bGU+CiAgPHRleHQgY2xhc3M9InRpdGxlIiB4PSIyMCIgeT0iMjYiPlJlYXIgZGVyYWlsbGV1ciDigJMgcGFydHMgbWFwPC90ZXh0PgogIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSIzMDAiIHk9IjI2Ij5TY2hlbWF0aWMuIERyaXZlIHNpZGUsIGZyb250IG9mIGJpa2UgdG8gdGhlIHJpZ2h0LjwvdGV4dD4KICA8IS0tIGZyYW1lOiBjaGFpbnN0YXkgYW5kIGRyb3BvdXQgLS0+CiAgPHBhdGggY2xhc3M9ImZyYW1lIiBkPSJNMzAwIDExMiBMNjIwIDE1MCBMNjIwIDE2NiBMMzAwIDEzMiBaIi8+CiAgPHBhdGggY2xhc3M9ImZyYW1lIiBkPSJNMjgyIDEwMCBMMzE4IDEwMCBMMzE4IDE0MCBMMzA0IDE5NiBMMjgyIDE5NiBMMjcyIDE0MCBaIi8+CiAgPCEtLSBjYXNzZXR0ZSAtLT4KICA8Y2lyY2xlIGNsYXNzPSJjb2ciIGN4PSIyOTUiIGN5PSIxMjAiIHI9IjcyIi8+CiAgPGNpcmNsZSBjbGFzcz0iY29nMiIgY3g9IjI5NSIgY3k9IjEyMCIgcj0iNDAiLz4KICA8Y2lyY2xlIGN4PSIyOTUiIGN5PSIxMjAiIHI9IjYiIGZpbGw9IiM0YTRmNTciLz4KICA8IS0tIGRlcmFpbGxldXIgYm9keSAtLT4KICA8cGF0aCBjbGFzcz0icGFydCIgZD0iTTI4NiAxODggTDMwMCAxOTggTDI0NiAyNjIgTDIyNCAyNTIgWiIvPgogIDxjaXJjbGUgY2xhc3M9InBhcnQiIGN4PSIyOTIiIGN5PSIxOTAiIHI9IjEyIi8+CiAgPGNpcmNsZSBjeD0iMjkyIiBjeT0iMTkwIiByPSI1IiBmaWxsPSIjZmZmIi8+CiAgPGNpcmNsZSBjbGFzcz0ic2NyZXciIGN4PSIyNjgiIGN5PSIxODIiIHI9IjUiLz4KICA8Y2lyY2xlIGNsYXNzPSJzY3JldyIgY3g9IjI2OCIgY3k9IjIyMiIgcj0iNCIvPgogIDxjaXJjbGUgY2xhc3M9InNjcmV3IiBjeD0iMjU4IiBjeT0iMjM0IiByPSI0Ii8+CiAgPCEtLSBiYXJyZWwgKyBob3VzaW5nICsgY2FibGUgYm9sdCAtLT4KICA8cmVjdCB4PSIyMTQiIHk9IjIyMiIgd2lkdGg9IjIyIiBoZWlnaHQ9IjEyIiByeD0iMyIgZmlsbD0iI2EzMzkxZCIgdHJhbnNmb3JtPSJyb3RhdGUoLTUwIDIyNSAyMjgpIi8+CiAgPHBhdGggY2xhc3M9ImhvdXNpbmciIGQ9Ik0yMTggMjE0IEMyMDAgMTgwIDIxMCAxNTAgMjYwIDE0MCIvPgogIDxjaXJjbGUgY3g9IjI0MiIgY3k9IjI2MiIgcj0iNSIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjMWQxZjIzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIGNhZ2UgYW5kIHB1bGxleXMgLS0+CiAgPHBhdGggY2xhc3M9ImNhZ2UiIGQ9Ik0yNTAgMjUwIEwyNjIgMjUyIEwzMDAgMzUyIEwyODYgMzU4IFoiLz4KICA8Y2lyY2xlIGNsYXNzPSJwdWwiIGN4PSIyNjIiIGN5PSIyNjIiIHI9IjEzIi8+CiAgPGNpcmNsZSBjbGFzcz0icHVsIiBjeD0iMjkyIiBjeT0iMzQ2IiByPSIxMyIvPgogIDwhLS0gY2hhaW4gLS0+CiAgPHBhdGggY2xhc3M9ImNoYWluIiBkPSJNNjIwIDkyIEwyOTUgNDggQTcyIDcyIDAgMCAwIDI0NiAxNzIgTDI3NSAyNjIgTDI3OSAzNDYgQTEzIDEzIDAgMCAwIDMwMCAzNTYgTDYyMCAyNDAiLz4KICA8IS0tIGxhYmVscyAtLT4KICA8bGluZSBjbGFzcz0ibGVhZCIgeDE9IjMwMCIgeTE9IjEwNCIgeDI9IjQ0MCIgeTI9IjcwIi8+PHRleHQgY2xhc3M9ImxhYiIgeD0iNDQ0IiB5PSI2NiI+aGFuZ2VyIChmcmFtZSB0YWIpPC90ZXh0PgogIDxsaW5lIGNsYXNzPSJsZWFkIiB4MT0iMzAwIiB5MT0iMTkwIiB4Mj0iNDQwIiB5Mj0iMTkwIi8+PHRleHQgY2xhc3M9ImxhYiIgeD0iNDQ0IiB5PSIxOTQiPm1vdW50aW5nIGJvbHQ8L3RleHQ+CiAgPGxpbmUgY2xhc3M9ImxlYWQiIHgxPSIyNjgiIHkxPSIxODIiIHgyPSIxMjAiIHkyPSI5NiIvPjx0ZXh0IGNsYXNzPSJsYWIiIHg9IjIwIiB5PSI5MiI+Qi1zY3JldzwvdGV4dD4KICA8bGluZSBjbGFzcz0ibGVhZCIgeDE9IjI2NCIgeTE9IjIyNiIgeDI9IjEyMCIgeTI9IjMwMCIvPjx0ZXh0IGNsYXNzPSJsYWIiIHg9IjIwIiB5PSIzMDAiPkggYW5kIEw8L3RleHQ+PHRleHQgY2xhc3M9ImxhYiIgeD0iMjAiIHk9IjMxNiI+bGltaXQgc2NyZXdzPC90ZXh0PgogIDxsaW5lIGNsYXNzPSJsZWFkIiB4MT0iMjIwIiB5MT0iMjI2IiB4Mj0iMTIwIiB5Mj0iMjAwIi8+PHRleHQgY2xhc3M9ImxhYiIgeD0iMjAiIHk9IjIwNCI+YmFycmVsIGFkanVzdGVyPC90ZXh0PgogIDxsaW5lIGNsYXNzPSJsZWFkIiB4MT0iMjEyIiB5MT0iMTcwIiB4Mj0iMTIwIiB5Mj0iMTUwIi8+PHRleHQgY2xhc3M9ImxhYiIgeD0iMjAiIHk9IjE1NCI+aG91c2luZzwvdGV4dD4KICA8bGluZSBjbGFzcz0ibGVhZCIgeDE9IjI0NiIgeTE9IjI2NCIgeDI9IjEyMCIgeTI9IjI1MCIvPjx0ZXh0IGNsYXNzPSJsYWIiIHg9IjIwIiB5PSIyNTQiPmNhYmxlIGZpeGluZyBib2x0PC90ZXh0PgogIDxsaW5lIGNsYXNzPSJsZWFkIiB4MT0iMjc1IiB5MT0iMjYyIiB4Mj0iNDQwIiB5Mj0iMjYyIi8+PHRleHQgY2xhc3M9ImxhYiIgeD0iNDQ0IiB5PSIyNjYiPmd1aWRlIHB1bGxleSAodXBwZXIpPC90ZXh0PgogIDxsaW5lIGNsYXNzPSJsZWFkIiB4MT0iMzA1IiB5MT0iMzQ2IiB4Mj0iNDQwIiB5Mj0iMzMwIi8+PHRleHQgY2xhc3M9ImxhYiIgeD0iNDQ0IiB5PSIzMzQiPnRlbnNpb24gcHVsbGV5IChsb3dlcik8L3RleHQ+CiAgPGxpbmUgY2xhc3M9ImxlYWQiIHgxPSIyODUiIHkxPSIzMDAiIHgyPSI0NDAiIHkyPSIyOTgiLz48dGV4dCBjbGFzcz0ibGFiIiB4PSI0NDQiIHk9IjMwMiI+Y2FnZTwvdGV4dD4KICA8bGluZSBjbGFzcz0ibGVhZCIgeDE9IjIzMiIgeTE9Ijk2IiB4Mj0iMTMwIiB5Mj0iNjIiLz48dGV4dCBjbGFzcz0ibGFiIiB4PSIyMCIgeT0iNjYiPmNhc3NldHRlIChjb2dzKTwvdGV4dD4KPC9zdmc+Cg==" alt="Labelled drawing of a rear derailleur on its hanger, showing the mounting bolt, B-screw, H and L limit screws, barrel adjuster, cable housing, cable fixing bolt, guide pulley, tension pulley, cage and cassette.">
+<figcaption>Parts map. Teacher's drawing, after Park Tool and Shimano diagrams.<sup class="src"><a href="#l1">1</a>,<a href="#l3">3</a></sup></figcaption>
+</figure>
+<dl class="glossary">
+  <dt>Cog, cassette</dt><dd>Each toothed wheel on the back wheel is a cog; the stack is the cassette. Smallest cog = fastest gear; largest cog = easiest climbing gear.</dd>
+  <dt>Cage, guide pulley</dt><dd>The cage is the pair of plates holding two small toothed wheels. The upper one, nearest the cogs, is the guide pulley: every setting is judged by where it sits.<sup class="src"><a href="#l1">1</a></sup></dd>
+  <dt>H and L screws (limit screws)</dt><dd>Two screws that stop the derailleur going too far: H at the smallest cog, L at the largest.<sup class="src"><a href="#l2">2</a></sup></dd>
+  <dt>Wall</dt><dd>Teacher's word for the stop a limit screw sets: the furthest the derailleur can travel that way.</dd>
+  <dt>Hanger</dt><dd>The small metal tab on the frame that the derailleur bolts to.<sup class="src"><a href="#l1">1</a></sup></dd>
+  <dt>B-screw</dt><dd>A screw resting on the hanger that tilts the derailleur, setting the gap between the guide pulley and the cogs.<sup class="src"><a href="#l1">1</a></sup></dd>
+  <dt>Barrel adjuster</dt><dd>A ridged tube where the cable housing ends. Turning it changes the cable's tension. Sophia's bike may have two – one on the derailleur and, on a two-lever trigger, one on the shifter; either one does the job.<sup class="src"><a href="#l2">2</a>,<a href="#l4">4</a></sup></dd>
+  <dt>Free play</dt><dd>The first part of a shift lever's movement, before it starts pulling the cable.<sup class="src"><a href="#l3">3</a></sup></dd>
+</dl>
+<p class="meta">Everything else is in the glossary.</p>
+
+<h2>The five words</h2>
+<div class="box memo"><span class="label">Memory hook</span>
+<p><strong>"High wire, low bee, barrel roll."</strong></p>
+<p>The hooks on this page are your teacher's own phrases; the rules behind them are sourced.</p>
+</div>
+<div class="box synth"><span class="label">Teacher's synthesis – why this order</span>
+<p>With the cable slack, a spring parks the derailleur on the smallest cog. So the H screw, which guards that cog, is the only thing you can set before the cable goes on. Shimano's sheets use this order.<sup class="src"><a href="#l3">3</a>,<a href="#l4">4</a></sup></p>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Word</th><th>Gear</th><th>What you turn</th><th>You know it's right when</th></tr></thead>
+<tbody>
+<tr><td><strong>High</strong></td><td>smallest cog</td><td>H screw until the guide pulley's centre is under the outer face of the smallest cog<sup class="src"><a href="#l3">3</a></sup></td><td>The pulley lines up as in the drawing below (the chain is not on yet)<sup class="src"><a href="#l3">3</a></sup></td></tr>
+<tr><td><strong>Wire</strong></td><td>smallest cog, shifter fully released</td><td>Fit the chain, then clamp the cable taut<sup class="src"><a href="#l3">3</a></sup></td><td>The chain runs quietly on the smallest cog without rubbing the next one (this proves High); one click moves the chain<sup class="src"><a href="#l1">1</a></sup></td></tr>
+<tr><td><strong>Low</strong></td><td>largest cog</td><td>L screw until the guide pulley's centre is under the centre of the largest cog<sup class="src"><a href="#l3">3</a>,<a href="#l5">5</a></sup></td><td>A hard push on the lever does not move the cage further in<sup class="src"><a href="#l1">1</a></sup></td></tr>
+<tr><td><strong>Bee</strong></td><td>largest cog</td><td>B-screw, cranks turning backwards, until the guide pulley is as close as it can be without touching. No millimetre figure overrides this<sup class="src"><a href="#l3">3</a>,<a href="#l4">4</a></sup></td><td>The pulley clears the largest cog, and shifts onto it are crisp<sup class="src"><a href="#l1">1</a></sup></td></tr>
+<tr><td><strong>Barrel</strong></td><td>2nd smallest cog</td><td>Barrel adjuster until, with the lever pressed just to the end of its free play, the chain touches the 3rd cog and rattles lightly<sup class="src"><a href="#l3">3</a>,<a href="#l4">4</a></sup></td><td>Every click moves one cog, both ways, with no rattle</td></tr>
+<tr><td><strong>Roll</strong></td><td>every gear</td><td>Nothing: listen, look, push</td><td>Quiet in every gear; pulley where the drawing shows; the push check holds<sup class="src"><a href="#l1">1</a></sup></td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">On a bike with two chainrings, use the big ring for High and Barrel and the small ring for Low and Bee. With one ring, just use it; with three, use the middle ring for Barrel.<sup class="src"><a href="#l1">1</a></sup> On the Boardman, the order after the five words differs slightly: see the guide.</p>
+
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzMwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgU2Vnb2UgVUksIFJvYm90bywgc2Fucy1zZXJpZiI+CiAgPHRpdGxlIGlkPSJ0Ij5SZWFyIGRlcmFpbGxldXIgbGltaXQgc2NyZXdzOiB3aGVyZSB0aGUgZ3VpZGUgcHVsbGV5IG11c3Qgc2l0PC90aXRsZT4KICA8ZGVzYyBpZD0iZCI+VHdvIHBhbmVscyB2aWV3ZWQgZnJvbSBiZWhpbmQgdGhlIGJpa2UuIExlZnQ6IGhpZ2ggbGltaXQsIHRoZSBjZW50cmUgb2YgdGhlIGd1aWRlIHB1bGxleSBsaW5lcyB1cCB3aXRoIHRoZSBvdXRlciBmYWNlIG9mIHRoZSBzbWFsbGVzdCBjb2cuIFJpZ2h0OiBsb3cgbGltaXQsIHRoZSBjZW50cmUgb2YgdGhlIGd1aWRlIHB1bGxleSBsaW5lcyB1cCB3aXRoIHRoZSBjZW50cmUgb2YgdGhlIGxhcmdlc3QgY29nLjwvZGVzYz4KICA8c3R5bGU+CiAgICAuY29ne2ZpbGw6IzhhOGY5OH0uY29nLm9ue2ZpbGw6I2EzMzkxZH0ucHVse2ZpbGw6IzFkMWYyM30uY2hhaW57c3Ryb2tlOiMxZDFmMjM7c3Ryb2tlLXdpZHRoOjN9CiAgICAuZ3VpZGV7c3Ryb2tlOiNhMzM5MWQ7c3Ryb2tlLXdpZHRoOjEuNTtzdHJva2UtZGFzaGFycmF5OjUgNH0ubGFie2ZvbnQtc2l6ZToxNXB4O2ZvbnQtd2VpZ2h0OjcwMDtmaWxsOiMxZDFmMjN9CiAgICAubm90ZXtmb250LXNpemU6MTIuNXB4O2ZpbGw6IzRhNGY1N30uYXh7c3Ryb2tlOiNjOWMyYjQ7c3Ryb2tlLXdpZHRoOjJ9CiAgPC9zdHlsZT4KICA8IS0tIFBhbmVsIEE6IGhpZ2ggbGltaXQgLS0+CiAgPGc+CiAgICA8dGV4dCBjbGFzcz0ibGFiIiB4PSIyMCIgeT0iMjYiPkggc2NyZXcgKGhpZ2ggbGltaXQpPC90ZXh0PgogICAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjIwIiB5PSI0NCI+Vmlld2VkIGZyb20gYmVoaW5kLiBXaGVlbCB0byB0aGUgbGVmdC48L3RleHQ+CiAgICA8bGluZSBjbGFzcz0iYXgiIHgxPSIyMCIgeTE9IjE0MCIgeDI9IjMwMCIgeTI9IjE0MCIvPgogICAgPHJlY3QgY2xhc3M9ImNvZyIgeD0iNjAiICB5PSI2MCIgIHdpZHRoPSI2IiBoZWlnaHQ9IjE2MCIgcng9IjIiLz4KICAgIDxyZWN0IGNsYXNzPSJjb2ciIHg9IjgyIiAgeT0iNzAiICB3aWR0aD0iNiIgaGVpZ2h0PSIxNDAiIHJ4PSIyIi8+CiAgICA8cmVjdCBjbGFzcz0iY29nIiB4PSIxMDQiIHk9IjgwIiAgd2lkdGg9IjYiIGhlaWdodD0iMTIwIiByeD0iMiIvPgogICAgPHJlY3QgY2xhc3M9ImNvZyIgeD0iMTI2IiB5PSI4OCIgIHdpZHRoPSI2IiBoZWlnaHQ9IjEwNCIgcng9IjIiLz4KICAgIDxyZWN0IGNsYXNzPSJjb2ciIHg9IjE0OCIgeT0iOTUiICB3aWR0aD0iNiIgaGVpZ2h0PSI5MCIgIHJ4PSIyIi8+CiAgICA8cmVjdCBjbGFzcz0iY29nIiB4PSIxNzAiIHk9IjEwMSIgd2lkdGg9IjYiIGhlaWdodD0iNzgiICByeD0iMiIvPgogICAgPHJlY3QgY2xhc3M9ImNvZyIgeD0iMTkyIiB5PSIxMDYiIHdpZHRoPSI2IiBoZWlnaHQ9IjY4IiAgcng9IjIiLz4KICAgIDxyZWN0IGNsYXNzPSJjb2cgb24iIHg9IjIxNCIgeT0iMTExIiB3aWR0aD0iNiIgaGVpZ2h0PSI1OCIgcng9IjIiLz4KICAgIDxsaW5lIGNsYXNzPSJjaGFpbiIgeDE9IjIxNyIgeTE9IjE2OSIgeDI9IjIyMCIgeTI9IjIyOCIvPgogICAgPHJlY3QgY2xhc3M9InB1bCIgeD0iMjE2IiB5PSIyMjgiIHdpZHRoPSI4IiBoZWlnaHQ9IjQ4IiByeD0iMyIvPgogICAgPGxpbmUgY2xhc3M9Imd1aWRlIiB4MT0iMjIwIiB5MT0iOTYiIHgyPSIyMjAiIHkyPSIzMDAiLz4KICAgIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSIyMzIiIHk9IjI1MCI+Z3VpZGUgcHVsbGV5PC90ZXh0PgogICAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjIzMiIgeT0iMTA1Ij5vdXRlciBmYWNlIG9mPC90ZXh0PgogICAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjIzMiIgeT0iMTIwIj5zbWFsbGVzdCBjb2c8L3RleHQ+CiAgICA8dGV4dCBjbGFzcz0ibm90ZSIgeD0iMjAiIHk9IjMxOCI+UHVsbGV5IGNlbnRyZSB1bmRlciB0aGUgc21hbGxlc3QgY29nJ3Mgb3V0ZXIgZmFjZS48L3RleHQ+CiAgPC9nPgogIDwhLS0gUGFuZWwgQjogbG93IGxpbWl0IC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMCAwKSI+CiAgICA8dGV4dCBjbGFzcz0ibGFiIiB4PSIyMCIgeT0iMjYiPkwgc2NyZXcgKGxvdyBsaW1pdCk8L3RleHQ+CiAgICA8dGV4dCBjbGFzcz0ibm90ZSIgeD0iMjAiIHk9IjQ0Ij5WaWV3ZWQgZnJvbSBiZWhpbmQuIFdoZWVsIHRvIHRoZSBsZWZ0LjwvdGV4dD4KICAgIDxsaW5lIGNsYXNzPSJheCIgeDE9IjIwIiB5MT0iMTQwIiB4Mj0iMzAwIiB5Mj0iMTQwIi8+CiAgICA8cmVjdCBjbGFzcz0iY29nIG9uIiB4PSI2MCIgeT0iNjAiIHdpZHRoPSI2IiBoZWlnaHQ9IjE2MCIgcng9IjIiLz4KICAgIDxyZWN0IGNsYXNzPSJjb2ciIHg9IjgyIiAgeT0iNzAiICB3aWR0aD0iNiIgaGVpZ2h0PSIxNDAiIHJ4PSIyIi8+CiAgICA8cmVjdCBjbGFzcz0iY29nIiB4PSIxMDQiIHk9IjgwIiAgd2lkdGg9IjYiIGhlaWdodD0iMTIwIiByeD0iMiIvPgogICAgPHJlY3QgY2xhc3M9ImNvZyIgeD0iMTI2IiB5PSI4OCIgIHdpZHRoPSI2IiBoZWlnaHQ9IjEwNCIgcng9IjIiLz4KICAgIDxyZWN0IGNsYXNzPSJjb2ciIHg9IjE0OCIgeT0iOTUiICB3aWR0aD0iNiIgaGVpZ2h0PSI5MCIgIHJ4PSIyIi8+CiAgICA8cmVjdCBjbGFzcz0iY29nIiB4PSIxNzAiIHk9IjEwMSIgd2lkdGg9IjYiIGhlaWdodD0iNzgiICByeD0iMiIvPgogICAgPHJlY3QgY2xhc3M9ImNvZyIgeD0iMTkyIiB5PSIxMDYiIHdpZHRoPSI2IiBoZWlnaHQ9IjY4IiAgcng9IjIiLz4KICAgIDxyZWN0IGNsYXNzPSJjb2ciIHg9IjIxNCIgeT0iMTExIiB3aWR0aD0iNiIgaGVpZ2h0PSI1OCIgIHJ4PSIyIi8+CiAgICA8bGluZSBjbGFzcz0iY2hhaW4iIHgxPSI2MyIgeTE9IjIyMCIgeDI9IjYzIiB5Mj0iMjQwIi8+CiAgICA8cmVjdCBjbGFzcz0icHVsIiB4PSI1OSIgeT0iMjQwIiB3aWR0aD0iOCIgaGVpZ2h0PSI0OCIgcng9IjMiLz4KICAgIDxsaW5lIGNsYXNzPSJndWlkZSIgeDE9IjYzIiB5MT0iNTAiIHgyPSI2MyIgeTI9IjMwMCIvPgogICAgPHRleHQgY2xhc3M9Im5vdGUiIHg9Ijc2IiB5PSIyNjIiPmd1aWRlIHB1bGxleTwvdGV4dD4KICAgIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSI3NiIgeT0iNjIiPmNlbnRyZSBvZjwvdGV4dD4KICAgIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSI3NiIgeT0iNzciPmxhcmdlc3QgY29nPC90ZXh0PgogICAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjIwIiB5PSIzMTgiPlB1bGxleSBjZW50cmUgdW5kZXIgdGhlIGxhcmdlc3QgY29nJ3MgY2VudHJlLjwvdGV4dD4KICA8L2c+Cjwvc3ZnPgo=" alt="Two views from behind. Left: the H screw sets the guide pulley's centre directly under the outer face of the smallest cog. Right: the L screw sets the guide pulley's centre directly under the centre of the largest cog.">
+<figcaption>The two walls. High: pulley under the smallest cog's outer face. Low: pulley under the largest cog's centre.<sup class="src"><a href="#l3">3</a>,<a href="#l5">5</a></sup></figcaption>
+</figure>
+
+<h2>Three rules for which way to turn</h2>
+<div class="box memo"><span class="label">Memory hooks</span>
+<p><strong>Tighten a limit screw: its wall closes in.</strong> Screwing H or L in stops the derailleur sooner.<sup class="src"><a href="#l2">2</a></sup></p>
+<p><strong>Tighten B = Bigger gap.</strong> Screwing the B-screw in moves the guide pulley away from the cogs. A pulley that clatters (a rattling tick on the teeth as you pedal) is touching, so too close (teacher's synthesis, after Shimano's "not so close that it touches").<sup class="src"><a href="#l1">1</a>,<a href="#l3">3</a></sup></p>
+<p><strong>Unscrew to climb.</strong> Unscrewing the barrel tightens the cable and moves the chain towards the bigger cogs. Turn it a quarter turn at a time (a full turn if the chain does not move at all).<sup class="src"><a href="#l1">1</a>,<a href="#l2">2</a></sup></p>
+</div>
+
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMjcwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgU2Vnb2UgVUksIFJvYm90bywgc2Fucy1zZXJpZiI+CiAgPHRpdGxlIGlkPSJ0Ij5CYXJyZWwgYWRqdXN0ZXI6IHVuc2NyZXcgdG8gY2xpbWI8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj5UaGUgaG91c2luZyBzaXRzIGluIHRoZSBiYXJyZWwgYWRqdXN0ZXIsIHdoaWNoIHNjcmV3cyBpbnRvIHRoZSBkZXJhaWxsZXVyIG9yIHNoaWZ0ZXIuIFVuc2NyZXdpbmcgdGhlIGJhcnJlbCBwdXNoZXMgdGhlIGhvdXNpbmcgZnVydGhlciBhd2F5LCB3aGljaCB0aWdodGVucyB0aGUgaW5uZXIgY2FibGUgYW5kIG1vdmVzIHRoZSBjaGFpbiB0b3dhcmRzIHRoZSBiaWdnZXIgY29ncy4gU2NyZXdpbmcgaXQgaW4gc2xhY2tlbnMgdGhlIGNhYmxlIGFuZCBsZXRzIHRoZSBjaGFpbiBkcm9wIHRvd2FyZHMgdGhlIHNtYWxsZXIgY29ncy48L2Rlc2M+CiAgPHN0eWxlPi5ib2R5e2ZpbGw6I2M5YzJiNH0uYmFycmVse2ZpbGw6I2EzMzkxZH0uaG91c2luZ3tmaWxsOiMxZDFmMjN9LmNhYmxle3N0cm9rZTojNmI2Zjc2O3N0cm9rZS13aWR0aDoyfQogICAgLmxhYntmb250LXNpemU6MTVweDtmb250LXdlaWdodDo3MDA7ZmlsbDojMWQxZjIzfS5ub3Rle2ZvbnQtc2l6ZToxMi41cHg7ZmlsbDojNGE0ZjU3fS5hcnJvd3tzdHJva2U6IzJmNmIzYTtzdHJva2Utd2lkdGg6MztmaWxsOm5vbmV9PC9zdHlsZT4KICA8ZGVmcz48bWFya2VyIGlkPSJhaCIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI4IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI3IiBvcmllbnQ9ImF1dG8iPjxwYXRoIGQ9Ik0wIDBMMTAgNUwwIDEweiIgZmlsbD0iIzJmNmIzYSIvPjwvbWFya2VyPjwvZGVmcz4KICA8dGV4dCBjbGFzcz0ibGFiIiB4PSIyMCIgeT0iMjYiPlVuc2NyZXcgdG8gY2xpbWI8L3RleHQ+CiAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjIwIiB5PSI0NCI+QmFycmVsIGFkanVzdGVyLCBzY2hlbWF0aWMuPC90ZXh0PgogIDwhLS0gYmVmb3JlIC0tPgogIDxyZWN0IGNsYXNzPSJib2R5IiB4PSIzODAiIHk9IjgwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiByeD0iNiIvPgogIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSI0MjAiIHk9IjE1MCI+ZGVyYWlsbGV1ciAob3Igc2hpZnRlcikgYm9keTwvdGV4dD4KICA8cmVjdCBjbGFzcz0iYmFycmVsIiB4PSIzMjAiIHk9Ijg4IiB3aWR0aD0iNzAiIGhlaWdodD0iMzQiIHJ4PSI0Ii8+CiAgPHJlY3QgY2xhc3M9ImhvdXNpbmciIHg9IjYwIiB5PSI5NiIgd2lkdGg9IjI2MiIgaGVpZ2h0PSIxOCIgcng9IjQiLz4KICA8bGluZSBjbGFzcz0iY2FibGUiIHgxPSIzMCIgeTE9IjEwNSIgeDI9IjYwMCIgeTI9IjEwNSIvPgogIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSI3MCIgeT0iODgiPmhvdXNpbmcgKG91dGVyIGNhc2luZyk8L3RleHQ+CiAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjMwMCIgeT0iNzgiPmJhcnJlbDwvdGV4dD4KICA8cGF0aCBjbGFzcz0iYXJyb3ciIG1hcmtlci1lbmQ9InVybCgjYWgpIiBkPSJNMzAwIDE2MCBoLTExMCIvPgogIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSIyMCIgeT0iMTkyIj5VbnNjcmV3OiBiYXJyZWwgY29tZXMgb3V0LDwvdGV4dD4KICA8dGV4dCBjbGFzcz0ibm90ZSIgeD0iMjAiIHk9IjIxMCI+aG91c2luZyBwdXNoZWQgYmFjayw8L3RleHQ+CiAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjIwIiB5PSIyMjgiPmNhYmxlIHRpZ2h0ZXI6IGNoYWluIGNsaW1iczwvdGV4dD4KICA8dGV4dCBjbGFzcz0ibm90ZSIgeD0iMjAiIHk9IjI0NiI+dG8gYSBiaWdnZXIgY29nLjwvdGV4dD4KICA8cGF0aCBjbGFzcz0iYXJyb3ciIG1hcmtlci1lbmQ9InVybCgjYWgpIiBkPSJNNDAwIDE2MCBoMTEwIi8+CiAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjQwMCIgeT0iMTkyIj5TY3JldyBpbjogYmFycmVsIGdvZXMgaW4sPC90ZXh0PgogIDx0ZXh0IGNsYXNzPSJub3RlIiB4PSI0MDAiIHk9IjIxMCI+Y2FibGUgc2xhY2tlcjogY2hhaW4gZHJvcHM8L3RleHQ+CiAgPHRleHQgY2xhc3M9Im5vdGUiIHg9IjQwMCIgeT0iMjI4Ij50byBhIHNtYWxsZXIgY29nLjwvdGV4dD4KPC9zdmc+Cg==" alt="A barrel adjuster. Unscrewing it moves the barrel out of the derailleur, tightening the cable and moving the chain towards bigger cogs. Screwing it in slackens the cable and moves the chain towards smaller cogs.">
+<figcaption>Unscrew to climb.<sup class="src"><a href="#l1">1</a>,<a href="#l2">2</a></sup></figcaption>
+</figure>
+
+<h2>Practice: from memory</h2>
+<p>Cover the table above (scroll it away) and answer. Getting it out of your head is what makes it stay there; the first try counts.</p>
+<p class="quiz-score"></p>
+
+<div class="quiz" data-answer="b">
+  <p class="q">1. Which is the right order for a rear derailleur?</p>
+  <button data-key="a">L screw, cable, H screw, B-screw, barrel</button>
+  <button data-key="b">H screw, cable, L screw, B-screw, barrel</button>
+  <button data-key="c">Cable, barrel, H screw, L screw, B-screw</button>
+  <p class="why">"High wire, low bee, barrel roll." H first, because with the cable slack the spring parks the derailleur on the smallest cog – H's wall.<sup class="src"><a href="#l3">3</a></sup></p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="q">2. On a bike with two chainrings, which gear do you set the H screw in?</p>
+  <button data-key="a">Small ring and the largest cog</button>
+  <button data-key="b">Big ring with 2nd smallest cog</button>
+  <button data-key="c">Big ring with the smallest cog</button>
+  <p class="why">H is for High gear, the fast one: smallest cog. The small ring with the largest cog is for L and the B-screw; the 2nd smallest cog is for the barrel.<sup class="src"><a href="#l3">3</a></sup></p>
+</div>
+
+<div class="quiz" data-answer="a">
+  <p class="q">3. When H is right, where is the guide pulley's centre?</p>
+  <button data-key="a">Under the smallest cog's outer face</button>
+  <button data-key="b">Under the 2nd smallest cog's centre</button>
+  <button data-key="c">Under the smallest cog's own centre</button>
+  <p class="why">Shimano and SRAM give the same target: the outer face of the smallest cog. (For L it is the centre of the largest cog.)<sup class="src"><a href="#l3">3</a>,<a href="#l5">5</a></sup></p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="q">4. Shifts to a bigger cog are slow. What do you do with the barrel adjuster?</p>
+  <button data-key="a">Screw it in so cable tension drops</button>
+  <button data-key="b">Unscrew it so the cable is tighter</button>
+  <button data-key="c">Unscrew the L screw a quarter turn</button>
+  <p class="why">Unscrew to climb: a quarter turn of the barrel at a time. The L screw only matters if the chain cannot reach the largest cog at all.<sup class="src"><a href="#l1">1</a></sup></p>
+</div>
+
+<div class="quiz" data-answer="c">
+  <p class="q">5. The guide pulley clatters on the largest cog. What is the fix?</p>
+  <button data-key="a">Unscrew the barrel two turns</button>
+  <button data-key="b">Unscrew the B-screw a little</button>
+  <button data-key="c">Screw the B-screw in further</button>
+  <p class="why">Tighten B = Bigger gap. The clatter means the pulley is too close to the largest cog.<sup class="src"><a href="#l1">1</a></sup></p>
+</div>
+
+<div class="quiz" data-answer="b">
+  <p class="q">6. Which mistake can put the chain into the spokes?</p>
+  <button data-key="a">An H screw that is set too loose</button>
+  <button data-key="b">An L screw that is set too loose</button>
+  <button data-key="c">A barrel that is set out too far</button>
+  <p class="why">L guards the largest cog, next to the spokes. That is why the push check after Low is never skipped – on Sophia's bike, do it yourself before every handover.<sup class="src"><a href="#l1">1</a>,<a href="#l2">2</a></sup></p>
+</div>
+
+<h2>On the bike</h2>
+<p>Your win for this lesson: Sophia's new Altus fitted and shifting cleanly. Open the derailleur guide and pick "Sophia's bike" in the bar at the top. Then work through, ticking as you go:</p>
+<ol>
+  <li>Check these on your bikes first – the one left for Sophia's bike is which shifter.</li>
+  <li>Four things adjustment cannot fix – hanger, chain wear, cable, parts that match.</li>
+  <li>Remove and fit, then adjust: say each word out loud before you do its step.</li>
+</ol>
+
+<div class="box"><span class="label">Spacing</span>
+<p>Tomorrow, before you touch anything, say the five words and the three rules out loud, then try the guide's self-test. Again in a week, before the Defy.</p>
+</div>
+
+<div class="box synth"><span class="label">Read this</span>
+<p>Primary source: <a href="https://www.parktool.com/en-us/blog/repair-help/rear-derailleur-adjustment">Park Tool, "Rear Derailleur Adjustment"</a>. It has a photograph for every step above. Read it once before you start on Sophia's bike.</p>
+</div>
+
+<div class="box check"><span class="label">Ask</span>
+<p>Anything unclear, or the bike does not match the pictures? Ask your teacher (this agent) – a photo of the derailleur from behind helps.</p>
+</div>
+
+<p class="meta">Next: Lesson 2, the front derailleur on the Defy (same order: small wall, wire, big wall, tune). Lesson 3, diagnosing the Boardman.</p>
+
+<h2 id="sources">Sources</h2>
+<ol class="meta">
+  <li id="l1">Park Tool, <a href="https://www.parktool.com/en-us/blog/repair-help/rear-derailleur-adjustment">"Rear Derailleur Adjustment"</a> (2015).</li>
+  <li id="l2">Sheldon Brown and John Allen, <a href="https://www.sheldonbrown.com/derailer-adjustment.html">"Derailer Adjustment and Maintenance"</a>.</li>
+  <li id="l3">Shimano, <a href="https://si.shimano.com/en/pdfs/si/5X90B/SI-5X90B-003-ENG.pdf">service instructions SI-5X90B</a>, rear derailleur RD-5700.</li>
+  <li id="l4">Shimano, <a href="https://si.shimano.com/en/pdfs/dm/SL0002/DM-SL0002-05-ENG.pdf">dealer's manual DM-SL0002-05</a>, Revoshift shifter (names RD-M310).</li>
+  <li id="l5">SRAM, <a href="https://www.sram.com/globalassets/document-hierarchy/user-manuals/sram-road/drivetrain/1x-mechanical-road-systems-user-manual.pdf">"1x Mechanical Road Systems User Manual"</a>, Rev C (Rival 1).</li>
+</ol>
+
+</main>
+<script>
+/* Bicycle maintenance – quiz component.
+   Markup (one per question):
+     <div class="quiz" data-answer="b">
+       <p class="q">Question</p>
+       <button data-key="a">…</button><button data-key="b">…</button><button data-key="c">…</button>
+       <p class="why">Shown after any answer.</p>
+     </div>
+   Optional score line anywhere on the page: <p class="quiz-score"></p>
+   The first answer counts; the reader can still try the others. */
+(function () {
+  var quizzes = document.querySelectorAll(".quiz");
+  var score = document.querySelector(".quiz-score");
+  var answered = 0, right = 0;
+
+  function update() {
+    if (score) score.textContent = right + " of " + answered + " right first time (" + quizzes.length + " questions)";
+  }
+
+  quizzes.forEach(function (q) {
+    var why = q.querySelector(".why");
+    if (why) why.hidden = true;
+    var first = true;
+    q.querySelectorAll("button[data-key]").forEach(function (b) {
+      b.type = "button";
+      b.addEventListener("click", function () {
+        var ok = b.dataset.key === q.dataset.answer;
+        b.classList.add(ok ? "right" : "wrong");
+        b.setAttribute("aria-label", b.textContent + (ok ? " – right" : " – not this one"));
+        if (why) why.hidden = false;
+        if (first) { first = false; answered++; if (ok) right++; update(); }
+      });
+    });
+  });
+  update();
+})();
+</script>
+</body>
+</html>

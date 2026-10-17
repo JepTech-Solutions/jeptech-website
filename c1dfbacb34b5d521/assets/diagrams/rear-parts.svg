@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" role="img" aria-labelledby="t d" font-family="-apple-system, Segoe UI, Roboto, sans-serif">
+  <title id="t">Rear derailleur: the parts you will touch</title>
+  <desc id="d">Schematic side view from the drive side, front of the bike to the right. The derailleur hangs from the hanger by the mounting bolt. The B-screw rests against the hanger tab. The H and L limit screws sit on the body. The housing enters the barrel adjuster and the inner cable is clamped under the cable fixing bolt. The cage holds the guide pulley at the top and the tension pulley at the bottom.</desc>
+  <style>
+    .cog{fill:none;stroke:#8a8f98;stroke-width:9;stroke-dasharray:5 4}.cog2{fill:none;stroke:#8a8f98;stroke-width:6;stroke-dasharray:4 4}
+    .frame{fill:#c9c2b4;stroke:#8a8f98}.part{fill:#4a4f57}.cage{fill:#1d1f23}.pul{fill:#fff;stroke:#1d1f23;stroke-width:5}
+    .chain{fill:none;stroke:#a3391d;stroke-width:3}.screw{fill:#a3391d}.housing{fill:none;stroke:#1d1f23;stroke-width:7;stroke-linecap:round}
+    .lead{stroke:#4a4f57;stroke-width:1}.lab{font-size:13px;fill:#1d1f23;font-weight:600}.title{font-size:15px;font-weight:700;fill:#1d1f23}.note{font-size:12px;fill:#4a4f57}
+  </style>
+  <text class="title" x="20" y="26">Rear derailleur – parts map</text>
+  <text class="note" x="300" y="26">Schematic. Drive side, front of bike to the right.</text>
+  <!-- frame: chainstay and dropout -->
+  <path class="frame" d="M300 112 L620 150 L620 166 L300 132 Z"/>
+  <path class="frame" d="M282 100 L318 100 L318 140 L304 196 L282 196 L272 140 Z"/>
+  <!-- cassette -->
+  <circle class="cog" cx="295" cy="120" r="72"/>
+  <circle class="cog2" cx="295" cy="120" r="40"/>
+  <circle cx="295" cy="120" r="6" fill="#4a4f57"/>
+  <!-- derailleur body -->
+  <path class="part" d="M286 188 L300 198 L246 262 L224 252 Z"/>
+  <circle class="part" cx="292" cy="190" r="12"/>
+  <circle cx="292" cy="190" r="5" fill="#fff"/>
+  <circle class="screw" cx="268" cy="182" r="5"/>
+  <circle class="screw" cx="268" cy="222" r="4"/>
+  <circle class="screw" cx="258" cy="234" r="4"/>
+  <!-- barrel + housing + cable bolt -->
+  <rect x="214" y="222" width="22" height="12" rx="3" fill="#a3391d" transform="rotate(-50 225 228)"/>
+  <path class="housing" d="M218 214 C200 180 210 150 260 140"/>
+  <circle cx="242" cy="262" r="5" fill="#fff" stroke="#1d1f23" stroke-width="2"/>
+  <!-- cage and pulleys -->
+  <path class="cage" d="M250 250 L262 252 L300 352 L286 358 Z"/>
+  <circle class="pul" cx="262" cy="262" r="13"/>
+  <circle class="pul" cx="292" cy="346" r="13"/>
+  <!-- chain -->
+  <path class="chain" d="M620 92 L295 48 A72 72 0 0 0 246 172 L275 262 L279 346 A13 13 0 0 0 300 356 L620 240"/>
+  <!-- labels -->
+  <line class="lead" x1="300" y1="104" x2="440" y2="70"/><text class="lab" x="444" y="66">hanger (frame tab)</text>
+  <line class="lead" x1="300" y1="190" x2="440" y2="190"/><text class="lab" x="444" y="194">mounting bolt</text>
+  <line class="lead" x1="268" y1="182" x2="120" y2="96"/><text class="lab" x="20" y="92">B-screw</text>
+  <line class="lead" x1="264" y1="226" x2="120" y2="300"/><text class="lab" x="20" y="300">H and L</text><text class="lab" x="20" y="316">limit screws</text>
+  <line class="lead" x1="220" y1="226" x2="120" y2="200"/><text class="lab" x="20" y="204">barrel adjuster</text>
+  <line class="lead" x1="212" y1="170" x2="120" y2="150"/><text class="lab" x="20" y="154">housing</text>
+  <line class="lead" x1="246" y1="264" x2="120" y2="250"/><text class="lab" x="20" y="254">cable fixing bolt</text>
+  <line class="lead" x1="275" y1="262" x2="440" y2="262"/><text class="lab" x="444" y="266">guide pulley (upper)</text>
+  <line class="lead" x1="305" y1="346" x2="440" y2="330"/><text class="lab" x="444" y="334">tension pulley (lower)</text>
+  <line class="lead" x1="285" y1="300" x2="440" y2="298"/><text class="lab" x="444" y="302">cage</text>
+  <line class="lead" x1="232" y1="96" x2="130" y2="62"/><text class="lab" x="20" y="66">cassette (cogs)</text>
+</svg>
