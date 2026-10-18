@@ -62,7 +62,7 @@ sup { font-size: 0.65em; color: var(--ink-soft); }
   body { background: #fff; font-size: 8.4pt; line-height: 1.28; }
   h1 { font-size: 14pt; } h2 { font-size: 11pt; } .hook { font-size: 9.5pt; margin: 0.1rem 0 0.3rem; }
   .before { margin: 0.2rem 0 0.3rem; padding: 0.15rem 0.5rem; }
-  .step img { max-height: 46mm; object-fit: contain; background: #e9ebed; }
+  .step img { max-height: 40mm; object-fit: contain; background: #e9ebed; }
   .step h3 { font-size: 9pt; } .step .turn, .step .warn { font-size: 8pt; }
   table.nums { font-size: 7.6pt; } table.nums th, table.nums td { padding: 0.1rem 0.3rem; }
   .src { font-size: 6.8pt; margin: 0.2rem 0; } .meta { font-size: 7pt; }
